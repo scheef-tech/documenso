@@ -7,6 +7,9 @@ USER root
 # Accent color: #A2E771 → #009a76
 COPY packages/tailwind-config/index.cjs /app/packages/tailwind-config/index.cjs
 
+# Theme CSS (primary color, color scale)
+COPY packages/ui/styles/theme.css /app/packages/ui/styles/theme.css
+
 # German translations with fixes
 COPY packages/lib/translations/de/web.po /app/packages/lib/translations/de/web.po
 

@@ -79,21 +79,41 @@ for tmpl in "$BUILD"/email/templates/*.js; do
 done
 echo "  OK: branding logo"
 
-# 7. Fix signing page logo dimensions (wide logo, not square)
-echo "[7] Patching signing page logo dimensions..."
-SIGNING="$BUILD/../assets/server-build-*.js"
-for f in $SIGNING; do
-  if [ -f "$f" ] && grep -q 'h-12 w-12' "$f"; then
-    sed -i 's/h-12 w-12 md:mb-2/h-8 max-w-[200px] object-contain md:mb-2/g' "$f"
+# 7. Patch compiled CSS — replace Documenso green HSL with TA green
+echo "[7] Patching compiled CSS colors..."
+CSS_FILE="/app/apps/remix/build/client/assets/server-build-*.css"
+for f in $CSS_FILE; do
+  if [ -f "$f" ]; then
+    # Replace primary HSL values (95.08 71.08% 67.45% → 166 100% 30.2%)
+    sed -i 's/95\.08 71\.08% 67\.45%/166 100% 30.2%/g' "$f"
+    # Replace primary color scale HSL hue from 95 to 166
+    sed -i 's/95, 71%/166, 100%/g' "$f"
+    sed -i 's/95, 72%/166, 100%/g' "$f"
+    sed -i 's/95, 73%/166, 100%/g' "$f"
+    sed -i 's/94, 70%/166, 100%/g' "$f"
+    sed -i 's/98, 73%/166, 100%/g' "$f"
+    # Field card
+    sed -i 's/95 74% 90%/166 74% 90%/g' "$f"
     echo "  OK: $(basename "$f")"
   fi
 done
 
-# 8. Force light mode on signing page
-echo "[8] Forcing light mode on signing page..."
-for f in $SIGNING; do
-  if [ -f "$f" ] && grep -q '"min-h-screen"' "$f"; then
-    sed -i 's/"min-h-screen"/"dark-mode-disabled min-h-screen"/g' "$f"
+# 8. Fix signing page logo (wide logo, not square)
+echo "[8] Patching signing page logo..."
+SERVER_JS="/app/apps/remix/build/server/assets/server-build-*.js"
+for f in $SERVER_JS; do
+  if [ -f "$f" ] && grep -q 'h-12 w-12' "$f"; then
+    sed -i 's/h-12 w-12 md:mb-2/h-8 max-w-\[200px\] object-contain md:mb-2/g' "$f"
+    echo "  OK: $(basename "$f")"
+  fi
+done
+
+# 9. Patch metadata title
+echo "[9] Patching metadata..."
+for f in $SERVER_JS; do
+  if [ -f "$f" ]; then
+    sed -i 's/Documenso - The Open Source DocuSign Alternative/Team Abfindung - Vertragsunterzeichnung/g' "$f"
+    sed -i 's/Documenso/Team Abfindung/g' "$f" 2>/dev/null
     echo "  OK: $(basename "$f")"
   fi
 done
