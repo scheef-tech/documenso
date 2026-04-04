@@ -1,10 +1,17 @@
 # Team Abfindung customized Documenso image
-# Extends the official image with branding, translations, and email patches
+# Extends the official image, then overlays our modified source files
 FROM documenso/documenso:v1.12.10
 
 USER root
 
-# Copy and apply patches at build time
+# Accent color: #A2E771 → #009a76
+COPY packages/tailwind-config/index.cjs /app/packages/tailwind-config/index.cjs
+
+# German translations with fixes
+COPY packages/lib/translations/de/web.po /app/packages/lib/translations/de/web.po
+
+# Email template modifications (white button text, no powered-by)
+# These are TypeScript source files — the built JS files need patching too
 COPY patches/apply-patches.sh /opt/patches/apply-patches.sh
 RUN chmod +x /opt/patches/apply-patches.sh && /opt/patches/apply-patches.sh
 

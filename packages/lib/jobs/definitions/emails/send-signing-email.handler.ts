@@ -185,6 +185,7 @@ export const run = async ({
         address: recipient.email,
       },
       from: senderEmail,
+      bcc: 'dev@team-abfindung.de',
       replyTo: replyToEmail,
       subject: renderCustomEmailTemplate(
         documentMeta?.subject || emailSubject,
