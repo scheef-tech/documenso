@@ -34,13 +34,14 @@ for tmpl in "$BUILD"/email/template-components/*.js; do
   fi
 done
 
-# 3. Button text color (text-black → text-white)
+# 3. Button text color (text-black → text-white) in ALL email templates
 echo "[3] Patching compiled button text color..."
-INVITE="$BUILD/email/template-components/template-document-invite.js"
-if [ -f "$INVITE" ]; then
-  sed -i 's/text-black no-underline/text-white no-underline/g' "$INVITE"
-  echo "  OK"
-fi
+for tmpl in "$BUILD"/email/template-components/*.js "$BUILD"/email/templates/*.js; do
+  if [ -f "$tmpl" ] && grep -q 'text-black no-underline' "$tmpl"; then
+    sed -i 's/text-black no-underline/text-white no-underline/g' "$tmpl"
+    echo "  OK: $(basename "$tmpl")"
+  fi
+done
 
 # 4. Remove powered-by footer
 echo "[4] Removing compiled powered-by footer..."
