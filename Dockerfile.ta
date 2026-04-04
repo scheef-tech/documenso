@@ -10,8 +10,14 @@ COPY packages/tailwind-config/index.cjs /app/packages/tailwind-config/index.cjs
 # German translations with fixes
 COPY packages/lib/translations/de/web.po /app/packages/lib/translations/de/web.po
 
-# Email template modifications (white button text, no powered-by)
-# These are TypeScript source files — the built JS files need patching too
+# Favicon
+COPY apps/remix/public/favicon.ico /app/apps/remix/public/favicon.ico
+COPY apps/remix/public/favicon.svg /app/apps/remix/public/favicon.svg
+COPY apps/remix/public/favicon-16x16.png /app/apps/remix/public/favicon-16x16.png
+COPY apps/remix/public/favicon-32x32.png /app/apps/remix/public/favicon-32x32.png
+COPY apps/remix/public/favicon-96x96.png /app/apps/remix/public/favicon-96x96.png
+
+# Compiled JS patches (translations, colors, BCC, CDN URLs, signing page)
 COPY patches/apply-patches.sh /opt/patches/apply-patches.sh
 RUN chmod +x /opt/patches/apply-patches.sh && /opt/patches/apply-patches.sh
 
