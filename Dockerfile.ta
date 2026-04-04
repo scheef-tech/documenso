@@ -1,0 +1,9 @@
+# Team Abfindung customized Documenso image
+# Extends the official image with branding, translations, and email patches
+FROM documenso/documenso:v1.12.10
+
+# Copy patch script
+COPY patches/apply-patches.py /opt/patches/apply-patches.py
+
+# Apply patches at build time
+RUN python3 /opt/patches/apply-patches.py
