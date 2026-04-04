@@ -57,4 +57,13 @@ do
   fi
 done
 
+# 6. Force light mode in email templates (prevent Apple Mail dark mode)
+echo "[6] Adding color-scheme meta to compiled email templates..."
+for tmpl in "$BUILD"/email/templates/*.js; do
+  if [ -f "$tmpl" ] && grep -q '<Head' "$tmpl"; then
+    sed -i 's|Head, {}|Head, {children: [jsx("meta", {name: "color-scheme", content: "light only"}), jsx("meta", {name: "supported-color-schemes", content: "light only"})]}|g' "$tmpl" 2>/dev/null
+  fi
+done
+echo "  OK"
+
 echo "Done!"

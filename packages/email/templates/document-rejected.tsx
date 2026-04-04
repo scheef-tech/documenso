@@ -32,7 +32,10 @@ export function DocumentRejectedEmail({
 
   return (
     <Html>
-      <Head />
+      <Head>
+        <meta name="color-scheme" content="light only" />
+        <meta name="supported-color-schemes" content="light only" />
+      </Head>
       <Preview>{previewText}</Preview>
 
       <Body className="mx-auto my-auto bg-white font-sans">

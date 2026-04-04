@@ -38,7 +38,10 @@ export const DocumentCreatedFromDirectTemplateEmailTemplate = ({
 
   return (
     <Html>
-      <Head />
+      <Head>
+        <meta name="color-scheme" content="light only" />
+        <meta name="supported-color-schemes" content="light only" />
+      </Head>
       <Preview>{_(previewText)}</Preview>
 
       <Body className="mx-auto my-auto font-sans">
