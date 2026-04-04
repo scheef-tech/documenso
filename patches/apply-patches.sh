@@ -19,13 +19,20 @@ if [ -f "$TRANS" ]; then
   echo "  OK"
 fi
 
-# 2. Accent color in compiled tailwind config
+# 2. Accent color in compiled tailwind config + hardcoded email colors
 echo "[2] Patching compiled accent color..."
 TAILWIND="/app/packages/tailwind-config/index.cjs"
 if [ -f "$TAILWIND" ]; then
   sed -i "s/#A2E771/#009a76/g" "$TAILWIND"
-  echo "  OK"
+  echo "  OK: tailwind config"
 fi
+# Also fix hardcoded #7AC455 in compiled email templates
+for tmpl in "$BUILD"/email/template-components/*.js; do
+  if [ -f "$tmpl" ] && grep -q '7AC455' "$tmpl"; then
+    sed -i 's/#7AC455/#009a76/g' "$tmpl"
+    echo "  OK: $(basename "$tmpl")"
+  fi
+done
 
 # 3. Button text color (text-black → text-white)
 echo "[3] Patching compiled button text color..."
