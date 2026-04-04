@@ -57,13 +57,18 @@ do
   fi
 done
 
-# 6. Force light mode in email templates (prevent Apple Mail dark mode)
-echo "[6] Adding color-scheme meta to compiled email templates..."
+# 6. Replace image URLs with Cloudflare CDN URLs
+echo "[6] Patching image URLs to Cloudflare CDN..."
+DOC_IMG="$BUILD/email/template-components/template-document-image.js"
+if [ -f "$DOC_IMG" ]; then
+  sed -i "s|getAssetUrl('/static/document.png')|'https://imagedelivery.net/coO5-ODUTOt3Xy0qRkHGhQ/ta-email-document/public'|g" "$DOC_IMG"
+  echo "  OK: document image"
+fi
 for tmpl in "$BUILD"/email/templates/*.js; do
-  if [ -f "$tmpl" ] && grep -q '<Head' "$tmpl"; then
-    sed -i 's|Head, {}|Head, {children: [jsx("meta", {name: "color-scheme", content: "light only"}), jsx("meta", {name: "supported-color-schemes", content: "light only"})]}|g' "$tmpl" 2>/dev/null
+  if [ -f "$tmpl" ]; then
+    sed -i "s|src: branding.brandingLogo|src: 'https://imagedelivery.net/coO5-ODUTOt3Xy0qRkHGhQ/ta-email-logo/public'|g" "$tmpl"
   fi
 done
-echo "  OK"
+echo "  OK: branding logo"
 
 echo "Done!"
