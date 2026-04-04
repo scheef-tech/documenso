@@ -174,7 +174,7 @@ export const DocumentSigningPageView = ({
             <img
               src={`/api/branding/logo/team/${document.teamId}`}
               alt={`${document.team.name}'s Logo`}
-              className="mb-4 h-12 w-12 md:mb-2"
+              className="mb-4 h-8 max-w-[200px] object-contain md:mb-2"
             />
           )}
         <h1

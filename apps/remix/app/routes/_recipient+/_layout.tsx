@@ -20,7 +20,7 @@ export default function RecipientLayout() {
   const { sessionData } = useOptionalSession();
 
   return (
-    <div className="min-h-screen">
+    <div className="dark-mode-disabled min-h-screen">
       {sessionData?.user && <AuthenticatedHeader />}
 
       <main className="mb-8 mt-8 px-4 md:mb-12 md:mt-12 md:px-8">

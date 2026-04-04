@@ -79,4 +79,23 @@ for tmpl in "$BUILD"/email/templates/*.js; do
 done
 echo "  OK: branding logo"
 
+# 7. Fix signing page logo dimensions (wide logo, not square)
+echo "[7] Patching signing page logo dimensions..."
+SIGNING="$BUILD/../assets/server-build-*.js"
+for f in $SIGNING; do
+  if [ -f "$f" ] && grep -q 'h-12 w-12' "$f"; then
+    sed -i 's/h-12 w-12 md:mb-2/h-8 max-w-[200px] object-contain md:mb-2/g' "$f"
+    echo "  OK: $(basename "$f")"
+  fi
+done
+
+# 8. Force light mode on signing page
+echo "[8] Forcing light mode on signing page..."
+for f in $SIGNING; do
+  if [ -f "$f" ] && grep -q '"min-h-screen"' "$f"; then
+    sed -i 's/"min-h-screen"/"dark-mode-disabled min-h-screen"/g' "$f"
+    echo "  OK: $(basename "$f")"
+  fi
+done
+
 echo "Done!"
