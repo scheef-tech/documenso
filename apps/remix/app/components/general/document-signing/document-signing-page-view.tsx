@@ -67,13 +67,14 @@ export const DocumentSigningPageView = ({
   completedFields,
   isRecipientsTurn,
   allRecipients = [],
-  includeSenderDetails,
+  includeSenderDetails: _includeSenderDetails,
 }: DocumentSigningPageViewProps) => {
   const { documentData, documentMeta } = document;
 
-  const { derivedRecipientAccessAuth, user: authUser } = useRequiredDocumentSigningAuthContext();
+  const { derivedRecipientAccessAuth: _derivedRecipientAccessAuth, user: authUser } =
+    useRequiredDocumentSigningAuthContext();
 
-  const hasAuthenticator = authUser?.twoFactorEnabled
+  const _hasAuthenticator = authUser?.twoFactorEnabled
     ? authUser.twoFactorEnabled && authUser.email === recipient.email
     : false;
 
@@ -129,13 +130,9 @@ export const DocumentSigningPageView = ({
     }
   };
 
-  let senderName = document.user.name ?? '';
-  let senderEmail = `(${document.user.email})`;
-
-  if (includeSenderDetails) {
-    senderName = document.team?.name ?? '';
-    senderEmail = document.team?.teamEmail?.email ? `(${document.team.teamEmail.email})` : '';
-  }
+  // Sender details not used — replaced with contract explanation text
+  const _senderName = document.user.name ?? '';
+  const _senderEmail = `(${document.user.email})`;
 
   const selectedSigner = allRecipients?.find((r) => r.id === selectedSignerId);
   const targetSigner =
@@ -177,57 +174,17 @@ export const DocumentSigningPageView = ({
               className="mb-4 h-12 w-12 md:mb-2"
             />
           )}
-        <h1
-          className="block max-w-[20rem] truncate text-2xl font-semibold sm:mt-4 md:max-w-[30rem] md:text-3xl"
-          title={document.title}
-        >
+        <h1 className="block text-2xl font-semibold sm:mt-4 md:text-3xl" title={document.title}>
           {document.title}
         </h1>
 
         <div className="mt-1.5 flex flex-wrap items-center justify-between gap-y-2 sm:mt-2.5 sm:gap-y-0">
           <div className="max-w-[50ch]">
-            <span className="text-muted-foreground truncate" title={senderName}>
-              {senderName} {senderEmail}
-            </span>{' '}
             <span className="text-muted-foreground">
-              {match(recipient.role)
-                .with(RecipientRole.VIEWER, () =>
-                  includeSenderDetails ? (
-                    <Trans>
-                      on behalf of "{document.team?.name}" has invited you to view this document
-                    </Trans>
-                  ) : (
-                    <Trans>has invited you to view this document</Trans>
-                  ),
-                )
-                .with(RecipientRole.SIGNER, () =>
-                  includeSenderDetails ? (
-                    <Trans>
-                      on behalf of "{document.team?.name}" has invited you to sign this document
-                    </Trans>
-                  ) : (
-                    <Trans>has invited you to sign this document</Trans>
-                  ),
-                )
-                .with(RecipientRole.APPROVER, () =>
-                  includeSenderDetails ? (
-                    <Trans>
-                      on behalf of "{document.team?.name}" has invited you to approve this document
-                    </Trans>
-                  ) : (
-                    <Trans>has invited you to approve this document</Trans>
-                  ),
-                )
-                .with(RecipientRole.ASSISTANT, () =>
-                  includeSenderDetails ? (
-                    <Trans>
-                      on behalf of "{document.team?.name}" has invited you to assist this document
-                    </Trans>
-                  ) : (
-                    <Trans>has invited you to assist this document</Trans>
-                  ),
-                )
-                .otherwise(() => null)}
+              <Trans>
+                We need your signature on this contract so we can represent you and get the most out
+                of your severance.
+              </Trans>
             </span>
           </div>
 

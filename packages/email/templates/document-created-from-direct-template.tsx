@@ -46,7 +46,11 @@ export const DocumentCreatedFromDirectTemplateEmailTemplate = ({
           <Container className="mx-auto mb-2 mt-8 max-w-xl rounded-lg border border-solid border-slate-200 p-2 backdrop-blur-sm">
             <Section className="p-2">
               {branding.brandingEnabled && branding.brandingLogo ? (
-                <Img src="https://imagedelivery.net/coO5-ODUTOt3Xy0qRkHGhQ/ta-email-logo/public" alt="Branding Logo" className="mb-4 h-6" />
+                <Img
+                  src="https://imagedelivery.net/coO5-ODUTOt3Xy0qRkHGhQ/ta-email-logo/public"
+                  alt="Branding Logo"
+                  className="mb-4 h-6"
+                />
               ) : (
                 <Img
                   src="https://imagedelivery.net/coO5-ODUTOt3Xy0qRkHGhQ/ta-email-logo/public"
@@ -70,7 +74,7 @@ export const DocumentCreatedFromDirectTemplateEmailTemplate = ({
 
                 <Section className="my-6 text-center">
                   <Button
-                    className="bg-documenso-500 inline-flex items-center justify-center rounded-lg px-6 py-3 text-center text-sm font-medium text-black no-underline"
+                    className="bg-documenso-500 inline-flex items-center justify-center rounded-lg px-6 py-3 text-center text-sm font-medium text-white no-underline"
                     href={documentLink}
                   >
                     <Trans>View document</Trans>

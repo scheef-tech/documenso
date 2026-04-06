@@ -27,7 +27,7 @@ export const TemplateDocumentCompleted = ({
       <Section>
         <Section className="mb-4">
           <Column align="center">
-            <Text className="text-base font-semibold text-[#7AC455]">
+            <Text className="text-base font-semibold text-[#009a76]">
               <Img
                 src={getAssetUrl('/static/completed.png')}
                 className="-mt-0.5 mr-2 inline h-7 w-7 align-middle"
@@ -47,7 +47,7 @@ export const TemplateDocumentCompleted = ({
 
         <Section className="mb-6 mt-8 text-center">
           <Button
-            className="rounded-lg border border-solid border-slate-200 px-4 py-2 text-center text-sm font-medium text-black no-underline"
+            className="rounded-lg border border-solid border-slate-200 px-4 py-2 text-center text-sm font-medium text-white no-underline"
             href={downloadLink}
           >
             <Img

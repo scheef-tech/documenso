@@ -47,9 +47,17 @@ export const OrganisationAccountLinkConfirmationTemplate = ({
         <Section className="bg-white">
           <Container className="mx-auto mb-2 mt-8 max-w-xl rounded-lg border border-solid border-slate-200 px-2 pt-2 backdrop-blur-sm">
             {branding.brandingEnabled && branding.brandingLogo ? (
-              <Img src="https://imagedelivery.net/coO5-ODUTOt3Xy0qRkHGhQ/ta-email-logo/public" alt="Branding Logo" className="mb-4 h-6 p-2" />
+              <Img
+                src="https://imagedelivery.net/coO5-ODUTOt3Xy0qRkHGhQ/ta-email-logo/public"
+                alt="Branding Logo"
+                className="mb-4 h-6 p-2"
+              />
             ) : (
-              <Img src="https://imagedelivery.net/coO5-ODUTOt3Xy0qRkHGhQ/ta-email-logo/public" alt="Team Abfindung" className="mb-4 h-6 p-2" />
+              <Img
+                src="https://imagedelivery.net/coO5-ODUTOt3Xy0qRkHGhQ/ta-email-logo/public"
+                alt="Team Abfindung"
+                className="mb-4 h-6 p-2"
+              />
             )}
 
             <Section>
@@ -114,7 +122,7 @@ export const OrganisationAccountLinkConfirmationTemplate = ({
 
               <Section className="mb-6 mt-8 text-center">
                 <Button
-                  className="bg-documenso-500 inline-flex items-center justify-center rounded-lg px-6 py-3 text-center text-sm font-medium text-black no-underline"
+                  className="bg-documenso-500 inline-flex items-center justify-center rounded-lg px-6 py-3 text-center text-sm font-medium text-white no-underline"
                   href={confirmationLink}
                 >
                   <Trans>Review request</Trans>

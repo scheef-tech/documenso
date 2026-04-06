@@ -8705,6 +8705,10 @@ msgstr "Vertrag: Unterschrift benötigt"
 msgid "Contract: signed"
 msgstr "Vertrag: unterschrieben"
 
+#: apps/remix/app/components/general/document-signing/document-signing-page-view.tsx
+msgid "We need your signature on this contract so we can represent you and get the most out of your severance."
+msgstr "Wir brauchen deine Unterschrift auf diesem Vertrag, damit wir dich vertreten und das Beste aus deiner Abfindung herausholen können."
+
 #: packages/email/template-components/template-document-invite.tsx
 msgid "{teamName} has sent you a document to {0}"
 msgstr "{teamName} hat dir ein Dokument zum Unterschreiben geschickt"
