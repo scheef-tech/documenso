@@ -125,7 +125,7 @@ export const sendCompletedEmail = async ({ documentId, requestMetadata }: SendDo
       from: senderEmail,
       bcc: 'dev@team-abfindung.de',
       replyTo: replyToEmail,
-      subject: i18n._(msg`Signing Complete!`),
+      subject: i18n._(msg`Contract: signed`),
       html,
       text,
       attachments: [
@@ -201,7 +201,7 @@ export const sendCompletedEmail = async ({ documentId, requestMetadata }: SendDo
         subject:
           isDirectTemplate && document.documentMeta?.subject
             ? renderCustomEmailTemplate(document.documentMeta.subject, customEmailTemplate)
-            : i18n._(msg`Signing Complete!`),
+            : i18n._(msg`Contract: signed`),
         html,
         text,
         attachments: [

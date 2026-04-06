@@ -8697,6 +8697,14 @@ msgstr "Dokument signieren"
 msgid "Sign here"
 msgstr "Hier unterschreiben"
 
+#: packages/lib/jobs/definitions/emails/send-signing-email.handler.ts
+msgid "Contract: signature required"
+msgstr "Vertrag: Unterschrift benötigt"
+
+#: packages/lib/server-only/document/send-completed-email.ts
+msgid "Contract: signed"
+msgstr "Vertrag: unterschrieben"
+
 #: packages/email/template-components/template-document-invite.tsx
 msgid "{teamName} has sent you a document to {0}"
 msgstr "{teamName} hat dir ein Dokument zum Unterschreiben geschickt"

@@ -128,7 +128,7 @@ export const run = async ({
   }
 
   if (organisationType === OrganisationType.ORGANISATION) {
-    emailSubject = i18n._(msg`${team.name} invited you to ${recipientActionVerb} a document`);
+    emailSubject = i18n._(msg`Contract: signature required`);
     emailMessage = customEmail?.message ?? '';
 
     if (!emailMessage) {
