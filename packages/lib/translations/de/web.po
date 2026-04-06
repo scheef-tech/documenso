@@ -8710,12 +8710,16 @@ msgid "{teamName} has sent you a document to {0}"
 msgstr "{teamName} hat dir ein Dokument zum Unterschreiben geschickt"
 
 #: packages/email/templates/document-invite.tsx
-msgid "<0>Prozessfinanzierungsvertrag</0> — A litigation funding agreement where a third party covers legal costs in exchange for a share of any proceeds. You bear no financial risk if the case is unsuccessful."
-msgstr "<0>Prozessfinanzierungsvertrag</0> — Ein Prozessfinanzierer übernimmt alle Kosten des Rechtsstreits. Im Gegenzug erhält er einen Anteil am Erlös. Sollte der Fall keinen Erfolg haben, tragen Sie kein finanzielles Risiko."
+msgid "We need your signature on the attached contract so we can represent you and get the most out of your severance."
+msgstr "Wir brauchen kurz deine Unterschrift auf dem beiliegenden Vertrag, damit wir dich vertreten und das Beste aus deiner Abfindung herausholen können."
 
 #: packages/email/templates/document-invite.tsx
-msgid "<0>Widerrufsbelehrung</0> — A cancellation notice informing you of your right to withdraw from the contract within 14 days without giving reasons."
-msgstr "<0>Widerrufsbelehrung</0> — Sie haben das Recht, diesen Vertrag innerhalb von 14 Tagen ohne Angabe von Gründen zu widerrufen."
+msgid "<0>Prozessfinanzierungsvertrag</0> — We cover all legal costs. In return, we receive a share of the proceeds. If the case is unsuccessful, you bear no financial risk."
+msgstr "<0>Prozessfinanzierungsvertrag</0> — Wir übernehmen alle Kosten des Rechtsstreits. Im Gegenzug erhalten wir einen Anteil am Erlös. Sollte der Fall keinen Erfolg haben, trägst du kein finanzielles Risiko."
+
+#: packages/email/templates/document-invite.tsx
+msgid "<0>Widerrufsbelehrung</0> — You have the right to withdraw from the contract within 14 days without giving any reasons."
+msgstr "<0>Widerrufsbelehrung</0> — Du hast das Recht, diesen Vertrag innerhalb von 14 Tagen ohne Angabe von Gründen zu widerrufen."
 
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings._index.tsx
 msgid "View documents associated with this email"

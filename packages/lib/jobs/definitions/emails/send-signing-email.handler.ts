@@ -131,14 +131,9 @@ export const run = async ({
     emailSubject = i18n._(msg`Contract: signature required`);
     emailMessage = customEmail?.message ?? '';
 
+    // Leave emailMessage empty so the template shows the default explanation text
     if (!emailMessage) {
-      const inviterName = user.name || '';
-
-      emailMessage = i18n._(
-        settings.includeSenderDetails
-          ? msg`${inviterName} on behalf of "${team.name}" has invited you to ${recipientActionVerb} the document "${document.title}".`
-          : msg`${team.name} has invited you to ${recipientActionVerb} the document "${document.title}".`,
-      );
+      emailMessage = '';
     }
   }
 

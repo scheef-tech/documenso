@@ -43,9 +43,7 @@ export const DocumentInviteEmailTemplate = ({
   let previewText = msg`${inviterName} has invited you to ${action} ${documentName}`;
 
   if (organisationType === OrganisationType.ORGANISATION) {
-    previewText = includeSenderDetails
-      ? msg`${inviterName} on behalf of "${teamName}" has invited you to ${action} ${documentName}`
-      : msg`${teamName} has invited you to ${action} ${documentName}`;
+    previewText = msg`${teamName} has sent you a document to ${action}`;
   }
 
   if (selfSigner) {
@@ -107,18 +105,23 @@ export const DocumentInviteEmailTemplate = ({
                 </Text>
               ) : (
                 <>
+                  <Text className="mt-2 text-base text-slate-400">
+                    <Trans>
+                      We need your signature on the attached contract so we can represent you and
+                      get the most out of your severance.
+                    </Trans>
+                  </Text>
                   <Text className="mt-2 text-sm text-slate-400">
                     <Trans>
-                      <strong>Prozessfinanzierungsvertrag</strong> — A litigation funding agreement
-                      where a third party covers legal costs in exchange for a share of any
-                      proceeds. You bear no financial risk if the case is unsuccessful.
+                      <strong>Prozessfinanzierungsvertrag</strong> — We cover all legal costs. In
+                      return, we receive a share of the proceeds. If the case is unsuccessful, you
+                      bear no financial risk.
                     </Trans>
                   </Text>
                   <Text className="mt-1 text-sm text-slate-400">
                     <Trans>
-                      <strong>Widerrufsbelehrung</strong> — A cancellation notice informing you of
-                      your right to withdraw from the contract within 14 days without giving
-                      reasons.
+                      <strong>Widerrufsbelehrung</strong> — You have the right to withdraw from the
+                      contract within 14 days without giving any reasons.
                     </Trans>
                   </Text>
                 </>
