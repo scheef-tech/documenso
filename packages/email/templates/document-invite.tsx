@@ -104,27 +104,12 @@ export const DocumentInviteEmailTemplate = ({
                   </pre>
                 </Text>
               ) : (
-                <>
-                  <Text className="mt-2 text-base text-slate-400">
-                    <Trans>
-                      We need your signature on the attached contract so we can represent you and
-                      get the most out of your severance.
-                    </Trans>
-                  </Text>
-                  <Text className="mt-2 text-sm text-slate-400">
-                    <Trans>
-                      <strong>Prozessfinanzierungsvertrag</strong> — We cover all legal costs. In
-                      return, we receive a share of the proceeds. If the case is unsuccessful, you
-                      bear no financial risk.
-                    </Trans>
-                  </Text>
-                  <Text className="mt-1 text-sm text-slate-400">
-                    <Trans>
-                      <strong>Widerrufsbelehrung</strong> — You have the right to withdraw from the
-                      contract within 14 days without giving any reasons.
-                    </Trans>
-                  </Text>
-                </>
+                <Text className="mt-2 text-base text-slate-400">
+                  <Trans>
+                    We need your signature on the attached contract so we can represent you and get
+                    the most out of your severance.
+                  </Trans>
+                </Text>
               )}
             </Section>
           </Container>
