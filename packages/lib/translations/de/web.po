@@ -6612,7 +6612,7 @@ msgstr "Vorlagen in Ihrem öffentlichen Profil anzeigen, damit Ihre Zielgruppe u
 #: packages/lib/constants/recipient-roles.ts
 msgctxt "Recipient role action verb"
 msgid "Sign"
-msgstr ""
+msgstr "unterschreiben"
 
 #: apps/remix/app/routes/_profile+/p.$url.tsx
 #: apps/remix/app/components/tables/inbox-table.tsx
@@ -8688,6 +8688,10 @@ msgstr "Dokument anzeigen"
 #: packages/email/template-components/template-document-invite.tsx
 msgid "View Document"
 msgstr "Dokument ansehen"
+
+#: packages/email/template-components/template-document-invite.tsx
+msgid "View Document to sign"
+msgstr "Dokument signieren"
 
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings._index.tsx
 msgid "View documents associated with this email"
