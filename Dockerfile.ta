@@ -1,18 +1,57 @@
-# Team Abfindung Documenso image
-# Extends official image with TA customizations
-FROM documenso/documenso:v1.12.10
+# Team Abfindung Documenso image — built from source
+# Uses docker/Dockerfile as base, targeting linux/arm64
+FROM node:22-alpine3.20 AS base
+RUN apk add --no-cache openssl
 
-USER root
+FROM base AS builder
+RUN apk add --no-cache libc6-compat jq
+WORKDIR /app
+COPY . .
+RUN npm install -g "turbo@^1.9.3"
+RUN turbo prune --scope=@documenso/remix --docker
 
-# German translations source file
-COPY packages/lib/translations/de/web.po /app/packages/lib/translations/de/web.po
+FROM base AS installer
+RUN apk add --no-cache libc6-compat jq make cmake g++ openssl bash
+WORKDIR /app
 
-# Patch compiled translations
-RUN TRANS="/app/apps/remix/build/server/hono/packages/lib/translations/de/web.mjs" && \
-    if [ -f "$TRANS" ]; then \
-      sed -i 's/Lb3SXn\\":\[\\"Sign\\"]/Lb3SXn\\":\[\\"signieren\\"]/g' "$TRANS" && \
-      sed -i 's/\\"View Document to sign\\"/\\"Dokument signieren\\"/g' "$TRANS" && \
-      echo "Translations patched"; \
-    fi
+ENV HUSKY=0
+ENV DOCKER_OUTPUT=1
+ENV NEXT_TELEMETRY_DISABLED=1
+ARG NEXT_PRIVATE_ENCRYPTION_KEY="CAFEBABE"
+ENV NEXT_PRIVATE_ENCRYPTION_KEY="$NEXT_PRIVATE_ENCRYPTION_KEY"
+ARG NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY="DEADBEEF"
+ENV NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY="$NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY"
 
-USER node
+COPY .gitignore .gitignore
+COPY --from=builder /app/out/json/ .
+COPY --from=builder /app/out/package-lock.json ./package-lock.json
+COPY --from=builder /app/lingui.config.ts ./lingui.config.ts
+RUN npm ci
+
+COPY --from=builder /app/out/full/ .
+COPY turbo.json turbo.json
+RUN npm install -g "turbo@^1.9.3"
+RUN turbo run build --filter=@documenso/remix...
+
+FROM base AS runner
+ENV HUSKY=0
+ENV DOCKER_OUTPUT=1
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nodejs
+USER nodejs
+WORKDIR /app
+
+COPY --from=builder --chown=nodejs:nodejs /app/out/json/ .
+COPY --from=builder --chown=nodejs:nodejs /app/out/full/packages/tailwind-config ./packages/tailwind-config
+RUN npm ci --only=production
+
+COPY --from=installer --chown=nodejs:nodejs /app/apps/remix/build ./apps/remix/build
+COPY --from=installer --chown=nodejs:nodejs /app/apps/remix/public ./apps/remix/public
+COPY --from=installer --chown=nodejs:nodejs /app/packages/prisma/schema.prisma ./packages/prisma/schema.prisma
+COPY --from=installer --chown=nodejs:nodejs /app/packages/prisma/migrations ./packages/prisma/migrations
+RUN npx prisma generate --schema ./packages/prisma/schema.prisma
+
+COPY --chown=nodejs:nodejs ./docker/start.sh /app/apps/remix/start.sh
+WORKDIR /app/apps/remix
+CMD ["sh", "start.sh"]

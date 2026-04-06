@@ -62,7 +62,7 @@ export const DocumentInviteEmailTemplate = ({
       <Preview>{_(previewText)}</Preview>
 
       <Body className="mx-auto my-auto bg-white font-sans">
-        <Section>
+        <Section style={{ maxWidth: '600px', margin: '0 auto', overflowX: 'hidden' as const }}>
           <Container className="mx-auto mb-2 mt-8 max-w-xl rounded-lg border border-solid border-slate-200 p-4 backdrop-blur-sm">
             <Section>
               {branding.brandingEnabled && branding.brandingLogo ? (
@@ -105,7 +105,7 @@ export const DocumentInviteEmailTemplate = ({
 
               <Text className="mt-2 text-base text-slate-400">
                 {customBody ? (
-                  <pre className="font-sans text-base text-slate-400">{customBody}</pre>
+                  <pre className="font-sans text-base text-slate-400" style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>{customBody}</pre>
                 ) : (
                   <Trans>
                     {inviterName} has invited you to {action} the document "{documentName}".
