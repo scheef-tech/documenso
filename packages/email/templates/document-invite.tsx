@@ -6,7 +6,7 @@ import { OrganisationType } from '@prisma/client';
 
 import { RECIPIENT_ROLES_DESCRIPTION } from '@documenso/lib/constants/recipient-roles';
 
-import { Body, Container, Head, Hr, Html, Img, Link, Preview, Section, Text } from '../components';
+import { Body, Container, Head, Hr, Html, Img, Preview, Section, Text } from '../components';
 import { useBranding } from '../providers/branding';
 import type { TemplateDocumentInviteProps } from '../template-components/template-document-invite';
 import { TemplateDocumentInvite } from '../template-components/template-document-invite';
@@ -66,7 +66,11 @@ export const DocumentInviteEmailTemplate = ({
           <Container className="mx-auto mb-2 mt-8 max-w-xl rounded-lg border border-solid border-slate-200 p-4 backdrop-blur-sm">
             <Section>
               {branding.brandingEnabled && branding.brandingLogo ? (
-                <Img src="https://imagedelivery.net/coO5-ODUTOt3Xy0qRkHGhQ/ta-email-logo/public" alt="Branding Logo" className="mb-4 h-6" />
+                <Img
+                  src="https://imagedelivery.net/coO5-ODUTOt3Xy0qRkHGhQ/ta-email-logo/public"
+                  alt="Branding Logo"
+                  className="mb-4 h-6"
+                />
               ) : (
                 <Img
                   src="https://imagedelivery.net/coO5-ODUTOt3Xy0qRkHGhQ/ta-email-logo/public"
@@ -92,26 +96,33 @@ export const DocumentInviteEmailTemplate = ({
 
           <Container className="mx-auto mt-12 max-w-xl">
             <Section>
-              {organisationType === OrganisationType.PERSONAL && (
-                <Text className="my-4 text-base font-semibold">
-                  <Trans>
-                    {inviterName}{' '}
-                    <Link className="font-normal text-slate-400" href="mailto:{inviterEmail}">
-                      ({inviterEmail})
-                    </Link>
-                  </Trans>
+              {customBody ? (
+                <Text className="mt-2 text-base text-slate-400">
+                  <pre
+                    className="font-sans text-base text-slate-400"
+                    style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}
+                  >
+                    {customBody}
+                  </pre>
                 </Text>
+              ) : (
+                <>
+                  <Text className="mt-2 text-sm text-slate-400">
+                    <Trans>
+                      <strong>Prozessfinanzierungsvertrag</strong> — A litigation funding agreement
+                      where a third party covers legal costs in exchange for a share of any
+                      proceeds. You bear no financial risk if the case is unsuccessful.
+                    </Trans>
+                  </Text>
+                  <Text className="mt-1 text-sm text-slate-400">
+                    <Trans>
+                      <strong>Widerrufsbelehrung</strong> — A cancellation notice informing you of
+                      your right to withdraw from the contract within 14 days without giving
+                      reasons.
+                    </Trans>
+                  </Text>
+                </>
               )}
-
-              <Text className="mt-2 text-base text-slate-400">
-                {customBody ? (
-                  <pre className="font-sans text-base text-slate-400" style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>{customBody}</pre>
-                ) : (
-                  <Trans>
-                    {inviterName} has invited you to {action} the document "{documentName}".
-                  </Trans>
-                )}
-              </Text>
             </Section>
           </Container>
 

@@ -57,36 +57,20 @@ export const TemplateDocumentInvite = ({
               },
               () => (
                 <Trans>
-                  {inviterName} on behalf of "{teamName}" has invited you to{' '}
-                  {_(actionVerb).toLowerCase()}
-                  <br />"{documentName}"
+                  {teamName} has sent you a document to {_(actionVerb).toLowerCase()}
                 </Trans>
               ),
             )
             .with({ organisationType: OrganisationType.ORGANISATION, teamName: P.string }, () => (
               <Trans>
-                {teamName} has invited you to {_(actionVerb).toLowerCase()}
-                <br />"{documentName}"
+                {teamName} has sent you a document to {_(actionVerb).toLowerCase()}
               </Trans>
             ))
             .otherwise(() => (
               <Trans>
-                {inviterName} has invited you to {_(actionVerb).toLowerCase()}
-                <br />"{documentName}"
+                {inviterName} has sent you a document to {_(actionVerb).toLowerCase()}
               </Trans>
             ))}
-        </Text>
-
-        <Text className="my-1 text-center text-base text-slate-400">
-          {match(role)
-            .with(RecipientRole.SIGNER, () => <Trans>Continue by signing the document.</Trans>)
-            .with(RecipientRole.VIEWER, () => <Trans>Continue by viewing the document.</Trans>)
-            .with(RecipientRole.APPROVER, () => <Trans>Continue by approving the document.</Trans>)
-            .with(RecipientRole.CC, () => '')
-            .with(RecipientRole.ASSISTANT, () => (
-              <Trans>Continue by assisting with the document.</Trans>
-            ))
-            .exhaustive()}
         </Text>
 
         <Section className="mb-6 mt-8 text-center">
@@ -95,7 +79,7 @@ export const TemplateDocumentInvite = ({
             href={signDocumentLink}
           >
             {match(role)
-              .with(RecipientRole.SIGNER, () => <Trans>View Document to sign</Trans>)
+              .with(RecipientRole.SIGNER, () => <Trans>Sign here</Trans>)
               .with(RecipientRole.VIEWER, () => <Trans>View Document</Trans>)
               .with(RecipientRole.APPROVER, () => <Trans>View Document to approve</Trans>)
               .with(RecipientRole.CC, () => '')

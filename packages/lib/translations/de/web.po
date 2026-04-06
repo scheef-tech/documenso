@@ -8693,6 +8693,22 @@ msgstr "Dokument ansehen"
 msgid "View Document to sign"
 msgstr "Dokument signieren"
 
+#: packages/email/template-components/template-document-invite.tsx
+msgid "Sign here"
+msgstr "Hier unterschreiben"
+
+#: packages/email/template-components/template-document-invite.tsx
+msgid "{teamName} has sent you a document to {0}"
+msgstr "{teamName} hat dir ein Dokument zum Unterschreiben geschickt"
+
+#: packages/email/templates/document-invite.tsx
+msgid "<0>Prozessfinanzierungsvertrag</0> — A litigation funding agreement where a third party covers legal costs in exchange for a share of any proceeds. You bear no financial risk if the case is unsuccessful."
+msgstr "<0>Prozessfinanzierungsvertrag</0> — Ein Prozessfinanzierer übernimmt alle Kosten des Rechtsstreits. Im Gegenzug erhält er einen Anteil am Erlös. Sollte der Fall keinen Erfolg haben, tragen Sie kein finanzielles Risiko."
+
+#: packages/email/templates/document-invite.tsx
+msgid "<0>Widerrufsbelehrung</0> — A cancellation notice informing you of your right to withdraw from the contract within 14 days without giving reasons."
+msgstr "<0>Widerrufsbelehrung</0> — Sie haben das Recht, diesen Vertrag innerhalb von 14 Tagen ohne Angabe von Gründen zu widerrufen."
+
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings._index.tsx
 msgid "View documents associated with this email"
 msgstr "Dokumente ansehen, die mit dieser E-Mail verknüpft sind"
