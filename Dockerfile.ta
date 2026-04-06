@@ -36,6 +36,7 @@ RUN turbo run build --filter=@documenso/remix...
 FROM base AS runner
 ENV HUSKY=0
 ENV DOCKER_OUTPUT=1
+ENV NEXT_PRIVATE_JOBS_PROVIDER=local
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nodejs
