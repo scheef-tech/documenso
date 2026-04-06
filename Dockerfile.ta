@@ -1,3 +1,18 @@
 # Team Abfindung Documenso image
-# Clean base for now — customizations will be layered in later
+# Extends official image with TA customizations
 FROM documenso/documenso:v1.12.10
+
+USER root
+
+# German translations source file
+COPY packages/lib/translations/de/web.po /app/packages/lib/translations/de/web.po
+
+# Patch compiled translations
+RUN TRANS="/app/apps/remix/build/server/hono/packages/lib/translations/de/web.mjs" && \
+    if [ -f "$TRANS" ]; then \
+      sed -i 's/Lb3SXn\\":\[\\"Sign\\"]/Lb3SXn\\":\[\\"signieren\\"]/g' "$TRANS" && \
+      sed -i 's/\\"View Document to sign\\"/\\"Dokument signieren\\"/g' "$TRANS" && \
+      echo "Translations patched"; \
+    fi
+
+USER node
