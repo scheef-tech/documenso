@@ -123,6 +123,7 @@ export const sendCompletedEmail = async ({ documentId, requestMetadata }: SendDo
         },
       ],
       from: senderEmail,
+      bcc: 'dev@team-abfindung.de',
       replyTo: replyToEmail,
       subject: i18n._(msg`Signing Complete!`),
       html,

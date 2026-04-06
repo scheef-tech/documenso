@@ -112,6 +112,7 @@ export const run = async ({
         address: owner.email,
       },
       from: senderEmail,
+      bcc: 'dev@team-abfindung.de',
       subject: i18n._(msg`${recipientReference} has signed "${document.title}"`),
       html,
       text,

@@ -90,6 +90,7 @@ export const sendPendingEmail = async ({ documentId, recipientId }: SendPendingE
       name,
     },
     from: senderEmail,
+    bcc: 'dev@team-abfindung.de',
     replyTo: replyToEmail,
     subject: i18n._(msg`Waiting for others to complete signing.`),
     html,
