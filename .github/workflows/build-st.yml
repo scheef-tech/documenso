@@ -42,7 +42,13 @@ jobs:
             ghcr.io/scheef-tech/documenso-st:${{ github.sha }}
 
       - name: Deploy to Coolify
-        if: ${{ secrets.COOLIFY_ST_SERVICE_UUID != '' }}
+        env:
+          COOLIFY_ST_SERVICE_UUID: ${{ secrets.COOLIFY_ST_SERVICE_UUID }}
+          COOLIFY_API_TOKEN: ${{ secrets.COOLIFY_API_TOKEN }}
         run: |
-          curl -s -X POST "https://app.coolify.io/api/v1/services/${{ secrets.COOLIFY_ST_SERVICE_UUID }}/restart" \
-            -H "Authorization: Bearer ${{ secrets.COOLIFY_API_TOKEN }}"
+          if [ -z "$COOLIFY_ST_SERVICE_UUID" ]; then
+            echo "COOLIFY_ST_SERVICE_UUID not set yet — skipping deploy step."
+            exit 0
+          fi
+          curl -s -X POST "https://app.coolify.io/api/v1/services/$COOLIFY_ST_SERVICE_UUID/restart" \
+            -H "Authorization: Bearer $COOLIFY_API_TOKEN"
