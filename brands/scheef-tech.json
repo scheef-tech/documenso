@@ -8,8 +8,8 @@
     "primaryForegroundHsl": "0 0% 5%"
   },
   "assets": {
-    "logoUrl": "",
-    "logoWideUrl": "",
+    "logoUrl": "https://cdn.scheef.tech/scheef-tech/logo.png",
+    "logoWideUrl": "https://cdn.scheef.tech/scheef-tech/logo.png",
     "faviconUrl": "",
     "ogImageUrl": ""
   },
