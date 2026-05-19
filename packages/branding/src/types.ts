@@ -28,6 +28,11 @@ export type Brand = {
     faviconUrl: string;
     /** Open Graph image. */
     ogImageUrl?: string;
+    /**
+     * Decorative banner illustration shown above the body in document emails
+     * (invite/completed/signed). Empty string = no banner image.
+     */
+    emailHeroUrl?: string;
   };
 
   cert: {
@@ -45,6 +50,11 @@ export type Brand = {
     bcc?: string[];
     showPoweredByFooter: boolean;
     footerLinkUrl: string;
+    /**
+     * Postal address shown in the email footer. Multi-line string (use `\n`).
+     * Empty string = footer shows only legalName.
+     */
+    footerAddress: string;
     /** Per-event subject overrides; null/undefined keeps upstream Documenso default. */
     subjects?: Partial<Record<EmailSubjectKey, string>>;
   };

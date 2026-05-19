@@ -8,10 +8,10 @@
     "primaryForegroundHsl": "0 0% 5%"
   },
   "assets": {
-    "logoUrl": "https://cdn.scheef.tech/scheef-tech/logo.png",
-    "logoWideUrl": "https://cdn.scheef.tech/scheef-tech/logo-wide.png",
-    "faviconUrl": "https://cdn.scheef.tech/scheef-tech/favicon.ico",
-    "ogImageUrl": "https://cdn.scheef.tech/scheef-tech/og-image.jpg"
+    "logoUrl": "",
+    "logoWideUrl": "",
+    "faviconUrl": "",
+    "ogImageUrl": ""
   },
   "cert": {
     "countryName": "CY",
@@ -26,7 +26,8 @@
     "fromAddress": "sign@scheef.tech",
     "bcc": ["admin@scheef.tech"],
     "showPoweredByFooter": false,
-    "footerLinkUrl": "https://scheef.tech"
+    "footerLinkUrl": "https://scheef.tech",
+    "footerAddress": "One Base Ltd\nLarnaca, Cyprus"
   },
   "metadata": {
     "title": "scheef.tech",

@@ -8,10 +8,11 @@
     "primaryForegroundHsl": "0 0% 100%"
   },
   "assets": {
-    "logoUrl": "https://cdn.scheef.tech/team-abfindung/logo.png",
-    "logoWideUrl": "https://cdn.scheef.tech/team-abfindung/logo-wide.png",
+    "logoUrl": "https://imagedelivery.net/Pug8czIFWzKkw_OdHBPgRA/ta-email-logo/public",
+    "logoWideUrl": "https://imagedelivery.net/Pug8czIFWzKkw_OdHBPgRA/ta-email-logo/public",
     "faviconUrl": "https://cdn.scheef.tech/team-abfindung/favicon.ico",
-    "ogImageUrl": "https://cdn.scheef.tech/team-abfindung/og-image.jpg"
+    "ogImageUrl": "https://cdn.scheef.tech/team-abfindung/og-image.jpg",
+    "emailHeroUrl": "https://imagedelivery.net/Pug8czIFWzKkw_OdHBPgRA/ta-email-document/public"
   },
   "cert": {
     "countryName": "DE",
@@ -26,7 +27,8 @@
     "fromAddress": "noreply@team-abfindung.de",
     "bcc": ["dev@team-abfindung.de"],
     "showPoweredByFooter": false,
-    "footerLinkUrl": "https://team-abfindung.de"
+    "footerLinkUrl": "https://team-abfindung.de",
+    "footerAddress": "Team Abfindung GmbH\nMünchen, Deutschland"
   },
   "metadata": {
     "title": "Team Abfindung",
