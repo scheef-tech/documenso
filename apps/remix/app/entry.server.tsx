@@ -50,6 +50,7 @@ export default async function handleRequest(
           const stream = createReadableStreamFromReadable(body);
 
           responseHeaders.set('Content-Type', 'text/html');
+          responseHeaders.set('X-Robots-Tag', 'noindex, nofollow, noarchive');
 
           resolve(
             new Response(stream, {
