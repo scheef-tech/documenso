@@ -17,7 +17,7 @@ export const appMetaTags = (title?: string) => {
     },
     {
       name: 'robots',
-      content: 'noindex, nofollow',
+      content: 'noindex, nofollow, noarchive',
     },
     {
       property: 'og:title',
