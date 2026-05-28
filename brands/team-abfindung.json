@@ -1,0 +1,45 @@
+{
+  "name": "Team Abfindung",
+  "legalName": "Team Abfindung GmbH",
+  "slug": "team-abfindung",
+  "colors": {
+    "primaryHex": "#009a76",
+    "primaryHsl": "166 100% 30.2%",
+    "primaryForegroundHsl": "0 0% 100%"
+  },
+  "assets": {
+    "logoUrl": "https://imagedelivery.net/Pug8czIFWzKkw_OdHBPgRA/ta-email-logo/public",
+    "logoWideUrl": "https://imagedelivery.net/Pug8czIFWzKkw_OdHBPgRA/ta-email-logo/public",
+    "faviconUrl": "https://cdn.scheef.tech/team-abfindung/favicon.ico",
+    "ogImageUrl": "https://cdn.scheef.tech/team-abfindung/og-image.jpg",
+    "emailHeroUrl": "https://imagedelivery.net/Pug8czIFWzKkw_OdHBPgRA/ta-email-document/public"
+  },
+  "cert": {
+    "countryName": "DE",
+    "stateOrProvidence": "Bayern",
+    "localityName": "München",
+    "organizationName": "Team Abfindung GmbH",
+    "organizationalUnit": "Legal",
+    "email": "info@team-abfindung.de"
+  },
+  "email": {
+    "fromName": "Team Abfindung",
+    "fromAddress": "noreply@team-abfindung.de",
+    "bcc": ["dev@team-abfindung.de"],
+    "showPoweredByFooter": false,
+    "footerLinkUrl": "https://team-abfindung.de",
+    "footerAddress": "Team Abfindung GmbH\nMünchen, Deutschland"
+  },
+  "metadata": {
+    "title": "Team Abfindung",
+    "titleTemplate": "{page} - Team Abfindung",
+    "description": "Team Abfindung — Vertragsunterzeichnung",
+    "author": "Team Abfindung GmbH",
+    "robots": "noindex, nofollow",
+    "locale": "de"
+  },
+  "support": {
+    "email": "info@team-abfindung.de",
+    "url": "https://team-abfindung.de"
+  }
+}

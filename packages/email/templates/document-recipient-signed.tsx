@@ -1,8 +1,9 @@
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 
-import { Body, Container, Head, Html, Img, Preview, Section } from '../components';
+import { Body, Container, Head, Html, Preview, Section } from '../components';
 import { useBranding } from '../providers/branding';
+import { TemplateBrandLogo } from '../template-components/template-brand-logo';
 import { TemplateDocumentRecipientSigned } from '../template-components/template-document-recipient-signed';
 import { TemplateFooter } from '../template-components/template-footer';
 
@@ -39,15 +40,7 @@ export const DocumentRecipientSignedEmailTemplate = ({
         <Section className="bg-white">
           <Container className="mx-auto mb-2 mt-8 max-w-xl rounded-lg border border-solid border-slate-200 p-2 backdrop-blur-sm">
             <Section className="p-2">
-              {branding.brandingEnabled && branding.brandingLogo ? (
-                <Img src="https://imagedelivery.net/coO5-ODUTOt3Xy0qRkHGhQ/ta-email-logo/public" alt="Branding Logo" className="mb-4 h-6" />
-              ) : (
-                <Img
-                  src="https://imagedelivery.net/coO5-ODUTOt3Xy0qRkHGhQ/ta-email-logo/public"
-                  alt="Documenso Logo"
-                  className="mb-4 h-6"
-                />
-              )}
+              <TemplateBrandLogo className="mb-4 h-6" />
 
               <TemplateDocumentRecipientSigned
                 documentName={documentName}

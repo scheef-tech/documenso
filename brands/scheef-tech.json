@@ -1,0 +1,44 @@
+{
+  "name": "scheef.tech",
+  "legalName": "One Base Ltd",
+  "slug": "scheef-tech",
+  "colors": {
+    "primaryHex": "#3CB4F0",
+    "primaryHsl": "201 86% 59%",
+    "primaryForegroundHsl": "0 0% 5%"
+  },
+  "assets": {
+    "logoUrl": "https://cdn.scheef.tech/scheef-tech/logo.png",
+    "logoWideUrl": "https://cdn.scheef.tech/scheef-tech/logo.png",
+    "faviconUrl": "",
+    "ogImageUrl": ""
+  },
+  "cert": {
+    "countryName": "CY",
+    "stateOrProvidence": "Larnaca",
+    "localityName": "Larnaca",
+    "organizationName": "One Base Ltd",
+    "organizationalUnit": "scheef.tech",
+    "email": "admin@scheef.tech"
+  },
+  "email": {
+    "fromName": "scheef.tech",
+    "fromAddress": "sign@scheef.tech",
+    "bcc": ["admin@scheef.tech"],
+    "showPoweredByFooter": false,
+    "footerLinkUrl": "https://scheef.tech",
+    "footerAddress": "One Base Ltd\nLarnaca, Cyprus"
+  },
+  "metadata": {
+    "title": "scheef.tech",
+    "titleTemplate": "{page} - scheef.tech",
+    "description": "scheef.tech — Document signing",
+    "author": "One Base Ltd",
+    "robots": "noindex, nofollow",
+    "locale": "en"
+  },
+  "support": {
+    "email": "admin@scheef.tech",
+    "url": "https://scheef.tech"
+  }
+}

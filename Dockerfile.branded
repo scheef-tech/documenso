@@ -1,0 +1,99 @@
+# Branded Documenso image — applies a brand profile from `brands/<slug>.json`
+# at build time, baking the colors / metadata / cert identity / emails into
+# the resulting bundle.
+#
+# Build:
+#   docker build -f Dockerfile.branded \
+#     --build-arg BRAND_PROFILE=team-abfindung \
+#     --platform=linux/arm64 \
+#     -t documenso-team-abfindung .
+#
+# Replaces the older Dockerfile.ta — same shape, but `BRAND_PROFILE` switches
+# which profile gets applied instead of TA being hardcoded into source.
+
+FROM node:22-alpine3.20 AS base
+RUN apk add --no-cache openssl
+
+# ----- Builder: turbo prune + apply brand profile -----
+FROM base AS builder
+RUN apk add --no-cache libc6-compat jq bash
+WORKDIR /app
+COPY . .
+
+# Apply brand BEFORE pruning so the brand JSON + theme.css edits travel through
+# the rest of the build. Defaults to `team-abfindung` for back-compat with the
+# previous Dockerfile.ta; pass `--build-arg BRAND_PROFILE=<slug>` to override.
+ARG BRAND_PROFILE=team-abfindung
+RUN sh scripts/apply-brand.sh "$BRAND_PROFILE"
+
+RUN npm install -g "turbo@^1.9.3"
+RUN turbo prune --scope=@documenso/remix --docker
+
+# ----- Installer: install deps + run turbo build -----
+FROM base AS installer
+RUN apk add --no-cache libc6-compat jq make cmake g++ openssl bash
+WORKDIR /app
+
+ENV HUSKY=0
+ENV DOCKER_OUTPUT=1
+ENV NEXT_TELEMETRY_DISABLED=1
+ARG NEXT_PRIVATE_ENCRYPTION_KEY="CAFEBABE"
+ENV NEXT_PRIVATE_ENCRYPTION_KEY="$NEXT_PRIVATE_ENCRYPTION_KEY"
+ARG NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY="DEADBEEF"
+ENV NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY="$NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY"
+
+COPY .gitignore .gitignore
+COPY --from=builder /app/out/json/ .
+COPY --from=builder /app/out/package-lock.json ./package-lock.json
+COPY --from=builder /app/lingui.config.ts ./lingui.config.ts
+RUN npm ci
+
+COPY --from=builder /app/out/full/ .
+COPY turbo.json turbo.json
+RUN npm install -g "turbo@^1.9.3"
+RUN turbo run build --filter=@documenso/remix...
+
+# ----- Runner -----
+FROM base AS runner
+RUN apk add --no-cache jq
+
+ENV HUSKY=0
+ENV DOCKER_OUTPUT=1
+ENV NEXT_PRIVATE_JOBS_PROVIDER=local
+
+# Cert identity comes from the brand profile JSON, fed in as build-args so the
+# resulting image needs no per-deploy env config for cert info.
+ARG BRAND_PROFILE=team-abfindung
+COPY brands/${BRAND_PROFILE}.json /tmp/brand.json
+RUN export CERT_INFO_COUNTRY_NAME=$(jq -r '.cert.countryName' /tmp/brand.json) && \
+    export CERT_INFO_STATE_OR_PROVIDENCE=$(jq -r '.cert.stateOrProvidence' /tmp/brand.json) && \
+    export CERT_INFO_LOCALITY_NAME=$(jq -r '.cert.localityName' /tmp/brand.json) && \
+    export CERT_INFO_ORGANIZATION_NAME=$(jq -r '.cert.organizationName' /tmp/brand.json) && \
+    export CERT_INFO_ORGANIZATIONAL_UNIT=$(jq -r '.cert.organizationalUnit' /tmp/brand.json) && \
+    export CERT_INFO_EMAIL=$(jq -r '.cert.email' /tmp/brand.json) && \
+    printf "export CERT_INFO_COUNTRY_NAME=%s\nexport CERT_INFO_STATE_OR_PROVIDENCE=%s\nexport CERT_INFO_LOCALITY_NAME=%s\nexport CERT_INFO_ORGANIZATION_NAME=%s\nexport CERT_INFO_ORGANIZATIONAL_UNIT=%s\nexport CERT_INFO_EMAIL=%s\n" \
+      "$CERT_INFO_COUNTRY_NAME" "$CERT_INFO_STATE_OR_PROVIDENCE" "$CERT_INFO_LOCALITY_NAME" \
+      "$CERT_INFO_ORGANIZATION_NAME" "$CERT_INFO_ORGANIZATIONAL_UNIT" "$CERT_INFO_EMAIL" \
+      > /etc/brand-cert.env
+RUN rm /tmp/brand.json
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nodejs
+USER nodejs
+WORKDIR /app
+
+COPY --from=builder --chown=nodejs:nodejs /app/out/json/ .
+COPY --from=builder --chown=nodejs:nodejs /app/out/full/packages/tailwind-config ./packages/tailwind-config
+COPY --from=builder --chown=nodejs:nodejs /app/out/full/packages/branding ./packages/branding
+RUN npm ci --only=production
+
+COPY --from=installer --chown=nodejs:nodejs /app/apps/remix/build ./apps/remix/build
+COPY --from=installer --chown=nodejs:nodejs /app/apps/remix/public ./apps/remix/public
+COPY --from=installer --chown=nodejs:nodejs /app/packages/prisma/schema.prisma ./packages/prisma/schema.prisma
+COPY --from=installer --chown=nodejs:nodejs /app/packages/prisma/migrations ./packages/prisma/migrations
+RUN npx prisma generate --schema ./packages/prisma/schema.prisma
+
+COPY --chown=nodejs:nodejs ./docker/start.sh /app/apps/remix/start.sh
+COPY --chown=nodejs:nodejs ./docker/start-branded.sh /app/apps/remix/start-branded.sh
+WORKDIR /app/apps/remix
+CMD ["sh", "start-branded.sh"]

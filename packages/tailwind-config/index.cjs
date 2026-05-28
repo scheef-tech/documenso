@@ -1,6 +1,14 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { fontFamily } = require('tailwindcss/defaultTheme');
 const { default: flattenColorPalette } = require('tailwindcss/lib/util/flattenColorPalette');
+const { BRAND } = require('@documenso/branding');
+
+/**
+ * Brand primary palette. Drives `brand-*` Tailwind classes used in emails
+ * (where CSS variables don't resolve in clients, so we need literal hex values
+ * baked into inline styles).
+ */
+const brandPrimaryScale = BRAND.colors.primaryScale ?? generateScale(BRAND.colors.primaryHex);
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -65,19 +73,18 @@ module.exports = {
           DEFAULT: 'hsl(var(--widget))',
           foreground: 'hsl(var(--widget-foreground))',
         },
+        // Legacy alias — old `text-documenso-*` classes still resolve. New
+        // code should use `brand-*`. Both map to the active brand palette.
         documenso: {
-          DEFAULT: '#009a76',
-          50: '#FFFFFF',
-          100: '#FDFFFD',
-          200: '#E7F9DA',
-          300: '#D0F3B7',
-          400: '#B9ED94',
-          500: '#009a76',
-          600: '#83DF41',
-          700: '#66C622',
-          800: '#4D9619',
-          900: '#356611',
-          950: '#284E0D',
+          DEFAULT: BRAND.colors.primaryHex,
+          ...brandPrimaryScale,
+        },
+        brand: {
+          DEFAULT: BRAND.colors.primaryHex,
+          foreground: BRAND.colors.primaryForegroundHsl
+            ? `hsl(${BRAND.colors.primaryForegroundHsl})`
+            : '#ffffff',
+          ...brandPrimaryScale,
         },
         dawn: {
           DEFAULT: '#aaa89f',
@@ -172,4 +179,70 @@ function addVariablesForColors({ addBase, theme }) {
   addBase({
     ':root': newVars,
   });
+}
+
+/**
+ * Generate a 50–950 palette from a hex anchor. Mirrors
+ * `packages/branding/src/palette.ts` — kept in sync intentionally because the
+ * Tailwind config is CJS and can't import the TS helper directly.
+ */
+function generateScale(anchorHex) {
+  const [h, s] = hexToHsl(anchorHex);
+  const stops = [
+    ['50', 97],
+    ['100', 94],
+    ['200', 86],
+    ['300', 77],
+    ['400', 66],
+    ['500', 50],
+    ['600', 42],
+    ['700', 35],
+    ['800', 28],
+    ['900', 22],
+    ['950', 14],
+  ];
+  return Object.fromEntries(stops.map(([key, l]) => [key, hslToHex(h, s, l)]));
+}
+
+function hexToHsl(hex) {
+  const cleaned = hex.replace('#', '');
+  const r = parseInt(cleaned.slice(0, 2), 16) / 255;
+  const g = parseInt(cleaned.slice(2, 4), 16) / 255;
+  const b = parseInt(cleaned.slice(4, 6), 16) / 255;
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  const l = (max + min) / 2;
+  let h = 0;
+  let s = 0;
+  if (max !== min) {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r:
+        h = (g - b) / d + (g < b ? 6 : 0);
+        break;
+      case g:
+        h = (b - r) / d + 2;
+        break;
+      case b:
+        h = (r - g) / d + 4;
+        break;
+    }
+    h *= 60;
+  }
+  return [h, s * 100, l * 100];
+}
+
+function hslToHex(h, s, l) {
+  const sN = s / 100;
+  const lN = l / 100;
+  const k = (n) => (n + h / 30) % 12;
+  const a = sN * Math.min(lN, 1 - lN);
+  const f = (n) => {
+    const v = lN - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
+    return Math.round(v * 255)
+      .toString(16)
+      .padStart(2, '0');
+  };
+  return `#${f(0)}${f(8)}${f(4)}`;
 }
