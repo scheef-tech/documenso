@@ -182,8 +182,7 @@ export const DocumentSigningPageView = ({
           <div className="max-w-[50ch]">
             <span className="text-muted-foreground">
               <Trans>
-                We need your signature on this contract so we can represent you and get the most out
-                of your severance.
+                We need your signature on this document. Please review and sign below.
               </Trans>
             </span>
           </div>

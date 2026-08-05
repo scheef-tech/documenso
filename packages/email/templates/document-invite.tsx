@@ -95,8 +95,7 @@ export const DocumentInviteEmailTemplate = ({
               ) : (
                 <Text className="mt-2 text-base text-slate-400">
                   <Trans>
-                    We need your signature on the attached contract so we can represent you and get
-                    the most out of your severance.
+                    We need your signature on the attached document. Please review and sign it.
                   </Trans>
                 </Text>
               )}
