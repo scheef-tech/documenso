@@ -1,0 +1,43 @@
+{
+  "name": "Yannic Scheef",
+  "legalName": "Yannic Scheef",
+  "slug": "yannic",
+  "colors": {
+    "primaryHex": "#5FAEE3",
+    "primaryHsl": "204 70.2% 63.1%",
+    "primaryForegroundHsl": "0 0% 5%"
+  },
+  "assets": {
+    "logoUrl": "",
+    "logoWideUrl": "",
+    "faviconUrl": "",
+    "ogImageUrl": ""
+  },
+  "cert": {
+    "countryName": "CY",
+    "stateOrProvidence": "Larnaca",
+    "localityName": "Larnaca",
+    "organizationName": "Yannic Scheef",
+    "organizationalUnit": "yannic.life",
+    "email": "sign@yannic.life"
+  },
+  "email": {
+    "fromName": "Yannic Scheef",
+    "fromAddress": "sign@yannic.life",
+    "showPoweredByFooter": false,
+    "footerLinkUrl": "https://sign.yannic.life",
+    "footerAddress": "Yannic Scheef\nLarnaca, Cyprus"
+  },
+  "metadata": {
+    "title": "Yannic Scheef",
+    "titleTemplate": "{page} - Yannic Scheef",
+    "description": "Yannic Scheef — Document signing",
+    "author": "Yannic Scheef",
+    "robots": "noindex, nofollow",
+    "locale": "en"
+  },
+  "support": {
+    "email": "sign@yannic.life",
+    "url": "https://sign.yannic.life"
+  }
+}
