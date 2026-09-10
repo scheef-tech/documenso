@@ -1,0 +1,9 @@
+name = "brand-inject-sign-yannic"
+main = "worker.js"
+compatibility_date = "2026-09-10"
+account_id = "5634762de98310f403bf30445c60108b"
+workers_dev = false
+
+[[routes]]
+pattern = "sign.yannic.life/*"
+zone_name = "yannic.life"
