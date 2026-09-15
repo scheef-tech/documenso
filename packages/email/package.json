@@ -17,6 +17,7 @@
     "worker:test": "tsup worker/index.ts --format esm"
   },
   "dependencies": {
+    "@documenso/branding": "*",
     "@documenso/tailwind-config": "*",
     "@documenso/nodemailer-resend": "2.0.0",
     "@react-email/body": "0.0.4",

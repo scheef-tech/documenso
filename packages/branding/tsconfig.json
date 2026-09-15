@@ -1,0 +1,9 @@
+{
+  "extends": "@documenso/tsconfig/base.json",
+  "include": ["src/**/*.ts", "active.json"],
+  "compilerOptions": {
+    "rootDir": ".",
+    "resolveJsonModule": true,
+    "esModuleInterop": true
+  }
+}

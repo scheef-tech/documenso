@@ -1,3 +1,5 @@
+import { BRAND } from '@documenso/branding';
+
 import { Column, Img, Row, Section } from '../components';
 
 export interface TemplateDocumentImageProps {
@@ -5,10 +7,17 @@ export interface TemplateDocumentImageProps {
   className?: string;
 }
 
-export const TemplateDocumentImage = ({ assetBaseUrl, className }: TemplateDocumentImageProps) => {
-  const getAssetUrl = (path: string) => {
-    return new URL(path, assetBaseUrl).toString();
-  };
+/**
+ * Decorative banner illustration above the document body. Skipped entirely
+ * when the active brand profile doesn't supply an `emailHeroUrl` — instead of
+ * a broken-image icon we just don't render the section.
+ */
+export const TemplateDocumentImage = ({ className }: TemplateDocumentImageProps) => {
+  const heroUrl = BRAND.assets.emailHeroUrl || '';
+
+  if (!heroUrl) {
+    return null;
+  }
 
   return (
     <Section className={className}>
@@ -16,7 +25,7 @@ export const TemplateDocumentImage = ({ assetBaseUrl, className }: TemplateDocum
         <Column />
 
         <Column>
-          <Img className="h-42 mx-auto" src="https://imagedelivery.net/coO5-ODUTOt3Xy0qRkHGhQ/ta-email-document/public" alt="Team Abfindung" />
+          <Img className="h-42 mx-auto" src={heroUrl} alt={`${BRAND.name} Document`} />
         </Column>
 
         <Column />

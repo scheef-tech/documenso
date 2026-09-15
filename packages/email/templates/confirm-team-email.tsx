@@ -11,13 +11,13 @@ import {
   Head,
   Hr,
   Html,
-  Img,
   Link,
   Preview,
   Section,
   Text,
 } from '../components';
 import { useBranding } from '../providers/branding';
+import { TemplateBrandLogo } from '../template-components/template-brand-logo';
 import { TemplateFooter } from '../template-components/template-footer';
 import TemplateImage from '../template-components/template-image';
 
@@ -49,19 +49,7 @@ export const ConfirmTeamEmailTemplate = ({
       <Body className="mx-auto my-auto font-sans">
         <Section className="bg-white">
           <Container className="mx-auto mb-2 mt-8 max-w-xl rounded-lg border border-solid border-slate-200 px-2 pt-2 backdrop-blur-sm">
-            {branding.brandingEnabled && branding.brandingLogo ? (
-              <Img
-                src="https://imagedelivery.net/coO5-ODUTOt3Xy0qRkHGhQ/ta-email-logo/public"
-                alt="Branding Logo"
-                className="mb-4 h-6 p-2"
-              />
-            ) : (
-              <Img
-                src="https://imagedelivery.net/coO5-ODUTOt3Xy0qRkHGhQ/ta-email-logo/public"
-                alt="Team Abfindung"
-                className="mb-4 h-6 p-2"
-              />
-            )}
+            <TemplateBrandLogo className="mb-4 h-6 p-2" />
 
             <Section>
               <TemplateImage
