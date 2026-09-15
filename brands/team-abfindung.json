@@ -8,11 +8,11 @@
     "primaryForegroundHsl": "0 0% 100%"
   },
   "assets": {
-    "logoUrl": "https://imagedelivery.net/Pug8czIFWzKkw_OdHBPgRA/ta-email-logo/public",
-    "logoWideUrl": "https://imagedelivery.net/Pug8czIFWzKkw_OdHBPgRA/ta-email-logo/public",
-    "faviconUrl": "https://cdn.scheef.tech/team-abfindung/favicon.ico",
-    "ogImageUrl": "https://cdn.scheef.tech/team-abfindung/og-image.jpg",
-    "emailHeroUrl": "https://imagedelivery.net/Pug8czIFWzKkw_OdHBPgRA/ta-email-document/public"
+    "logoUrl": "https://imagedelivery.net/coO5-ODUTOt3Xy0qRkHGhQ/ta-email-logo/public",
+    "logoWideUrl": "https://imagedelivery.net/coO5-ODUTOt3Xy0qRkHGhQ/ta-email-logo/public",
+    "faviconUrl": "",
+    "ogImageUrl": "",
+    "emailHeroUrl": "https://imagedelivery.net/coO5-ODUTOt3Xy0qRkHGhQ/ta-email-document/public"
   },
   "cert": {
     "countryName": "DE",

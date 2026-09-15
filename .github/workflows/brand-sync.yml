@@ -1,0 +1,23 @@
+name: Brand Config Sync
+
+on:
+  pull_request:
+    paths:
+      - 'brands/**'
+      - 'packages/branding/**'
+      - 'scripts/check-brand-sync.sh'
+      - '.github/workflows/brand-sync.yml'
+  push:
+    paths:
+      - 'brands/**'
+      - 'packages/branding/**'
+      - 'scripts/check-brand-sync.sh'
+      - '.github/workflows/brand-sync.yml'
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash scripts/check-brand-sync.sh

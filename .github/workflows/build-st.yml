@@ -1,8 +1,12 @@
 name: Build scheef.tech Image
 
+# Manual-only. Dockerfile.branded has never produced a green build and this is a
+# ~43-minute linux/arm64 QEMU job; on a push trigger it fired on every
+# team-abfindung push (i.e. on every production deploy) and always went red,
+# on top of the real TA build in build-ta.yml. It also has no Coolify service
+# wired up yet (COOLIFY_ST_SERVICE_UUID unset -> the deploy step self-skips).
+# Dispatch it by hand until it goes green and a scheef.tech service exists.
 on:
-  push:
-    branches: [team-abfindung, feat/branding-config]
   workflow_dispatch:
 
 jobs:
