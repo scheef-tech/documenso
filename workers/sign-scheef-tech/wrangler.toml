@@ -1,0 +1,9 @@
+name = "umami-inject-sign-scheef"
+main = "worker.js"
+compatibility_date = "2026-09-30"
+account_id = "5634762de98310f403bf30445c60108b"
+workers_dev = false
+
+[[routes]]
+pattern = "sign.scheef.tech/*"
+zone_name = "scheef.tech"
